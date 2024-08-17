@@ -16,8 +16,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SWI-Prolog/swipl-devel.git
-        tag: V9.3.8
-        commit: dfe256b5434fd62af33aeff162f9127dd365125d
+        tag: V9.3.9
+        commit: e0f5df13452bcae7c07dafcc85795fec0e4f05d6
         x-checker-data:
           type: git
           tag-pattern: ^V(\d\.[\d.]+)$
