@@ -21,6 +21,7 @@ modules:
         x-checker-data:
           type: git
           tag-pattern: ^V(\d\.[\d.]+)$
+          timestamp-query: .published_at
       - type: file
         path: org.swi_prolog.swipl.desktop
       - type: file
