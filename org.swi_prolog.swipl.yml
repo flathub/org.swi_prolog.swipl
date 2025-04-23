@@ -16,11 +16,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/SWI-Prolog/swipl-devel.git
-        tag: V9.3.22
-        commit: c35d716a76178dc1d4f062293ef7c82354154376
-        x-checker-data:
-          type: git
-          tag-pattern: ^V(\d\.[\d.]+)$
+        # tag: V9.3.22
+        commit: 3120ee45b92f6369d672b4662a97448595b0a480
+        # x-checker-data:
+        #   type: git
+        #   tag-pattern: ^V(\d\.[\d.]+)$
       - type: file
         path: org.swi_prolog.swipl.desktop
       - type: file
