@@ -12,9 +12,6 @@ finish-args:
   - --socket=wayland
   - --share=network
   - --filesystem=host
-  - --filesystem=xdg-config/fontconfig
-  - --filesystem=xdg-data/fonts
-  - --filesystem=xdg-cache/fontconfig
   - --device=dri
 
 modules:
