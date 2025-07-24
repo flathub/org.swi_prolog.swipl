@@ -1,17 +1,66 @@
 id: org.swi_prolog.swipl
-runtime: org.kde.Platform
-runtime-version: '6.7'
-sdk: org.kde.Sdk
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
 command: swipl-win
 
 finish-args:
+  - --env=NO_AT_BRIDGE=1
+  - --env=XCOMPOSEFILE=/app/etc/Compose
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
   - --share=network
   - --filesystem=host
   - --device=dri
 
 modules:
+  - name: SDL3
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DSDL_TEST=OFF
+      - -DSDL_SHARED=ON
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL.git
+        commit: 68bfcb6c5419f51104e74e72ea0f8d405a4615b0
+
+  - name: SDL3_image
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DSDLIMAGE_BACKEND_IMAGEIO=ON
+      - -DSDLIMAGE_BACKEND_STB=ON
+      - -DSDLIMAGE_JPG=ON
+      - -DSDLIMAGE_PNG=ON
+      - -DSDLIMAGE_WEBP=OFF
+    sources:
+      - type: git
+        url: https://github.com/libsdl-org/SDL_image
+        commit: 11154afb7855293159588b245b446a4ef09e574f
+
+  - name: libedit
+    sources:
+      - type: archive
+        url: https://thrysoee.dk/editline/libedit-20250104-3.1.tar.gz
+        sha256: 23792701694550a53720630cd1cd6167101b5773adddcb4104f7345b73a568ac
+    buildsystem: autotools
+
+  - name: libyaml
+    buildsystem: autotools
+    sources:
+      - type: git
+        url: https://github.com/yaml/libyaml
+        commit: 840b65c40675e2d06bf40405ad3f12dec7f35923
+    build-commands:
+      - ./bootstrap
+
+  - name: fix-compose
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/etc
+      - grep -v dead_hamza /usr/share/X11/locale/en_US.UTF-8/Compose > /app/etc/Compose
+
   - name: swipl
     sources:
       - type: git
@@ -29,8 +78,12 @@ modules:
         path: org.swi_prolog.swipl.png
     buildsystem: cmake-ninja
     builddir: true
+    build-options:
+      env:
+        SDL_VIDEODRIVER: dummy
     config-opts:
       - -DCMAKE_BUILD_TYPE=PGO
+      - -DEPILOG=ON
       - -DSKIP_SSL_TESTS=ON
     post-install:
       - install -D -m0644 ../org.swi_prolog.swipl.png /app/share/icons/hicolor/128x128/apps/org.swi_prolog.swipl.png
