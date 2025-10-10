@@ -20,8 +20,11 @@
   </description>
   
   <releases>
-  	<release version="9.3.31" date="2025-09-22">
+  	<release version="9.3.32" date="2025-10-10">
  	 	 	<description></description>
+  	</release>
+  	<release version="9.3.31" date="2025-09-22">
+ 	 	 	<description/>
   	</release>
   	<release version="9.3.30" date="2025-09-09">
  	 	 	<description/>
