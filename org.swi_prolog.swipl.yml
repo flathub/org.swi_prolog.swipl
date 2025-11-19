@@ -15,12 +15,6 @@ finish-args:
   - --device=dri
 
 modules:
-  - name: libedit
-    sources:
-      - type: archive
-        url: https://thrysoee.dk/editline/libedit-20250104-3.1.tar.gz
-        sha256: 23792701694550a53720630cd1cd6167101b5773adddcb4104f7345b73a568ac
-
   - name: libyaml
     sources:
       - type: git
