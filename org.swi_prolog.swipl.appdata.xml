@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>org.swi_prolog.swipl</id>
-  
+
   <name>SWI-Prolog</name>
   <summary>ISO/Edinburgh-style Prolog interpreter</summary>
   <url type="homepage">https://www.swi-prolog.org</url>
@@ -11,101 +11,104 @@
   <developer id="org.swi_prolog">
     <name>SWI-Prolog</name>
   </developer>
-  
+
   <description>
     <p>
-      SWI-Prolog is an open source (BSD-2) implementation of the Prolog language with many extensions. It is implemented in C (version 11) and Prolog and is available for many platforms (Linux, practically any POSIX like system, MacOS, Windows). All CPUs supported by Debian Linux are supported. A prototype running in your browser based on WASM (Web Assembly) is available. 
+      SWI-Prolog is an open source (BSD-2) implementation of the Prolog language with many extensions. It is implemented in C (version 11) and Prolog and is available for many platforms (Linux, practically any POSIX like system, MacOS, Windows). All CPUs supported by Debian Linux are supported. A prototype running in your browser based on WASM (Web Assembly) is available.
       (SWI-)Prolog is a versatile language. It is being used for business rule validation, natural language processing, software verification, software refactoring, network configuration, security, robotics, reasoning in legal and medical domains, graph processing, machine learning (ILP, PLP), linked data (RDF), mathematical proofs, and much more.
     </p>
   </description>
-  
+
   <releases>
-  	<release version="9.3.36" date="2025-12-02">
- 	 	 	<description></description>
-  	</release>
-  	<release version="9.3.35" date="2025-11-19">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.34" date="2025-11-05">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.33" date="2025-10-24">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.32" date="2025-10-10">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.31" date="2025-09-22">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.30" date="2025-09-09">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.29" date="2025-09-01">
-      		<description/>
+	<release version="10.1.1" date="2026-01-13">
+			<description></description>
+	</release>
+	<release version="9.3.36" date="2025-12-02">
+			<description></description>
+	</release>
+	<release version="9.3.35" date="2025-11-19">
+			<description/>
+	</release>
+	<release version="9.3.34" date="2025-11-05">
+			<description/>
+	</release>
+	<release version="9.3.33" date="2025-10-24">
+			<description/>
+	</release>
+	<release version="9.3.32" date="2025-10-10">
+			<description/>
+	</release>
+	<release version="9.3.31" date="2025-09-22">
+			<description/>
+	</release>
+	<release version="9.3.30" date="2025-09-09">
+			<description/>
+	</release>
+	<release version="9.3.29" date="2025-09-01">
+		<description/>
     </release>
     <release version="9.3.28" date="2025-08-07">
-      		<description/>
+		<description/>
     </release>
     <release version="9.3.27" date="2025-08-07">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.26" date="2025-07-24">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.25" date="2025-06-26">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.22" date="2025-04-02">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.21" date="2025-03-12">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.20" date="2025-02-07">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.19" date="2025-01-23">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.18" date="2025-01-07">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.17" date="2024-12-20">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.16" date="2024-12-02">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.15" date="2024-11-18">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.14" date="2024-10-31">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.13" date="2024-10-13">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.12" date="2024-09-27">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.11" date="2024-09-08">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.10" date="2024-08-25">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.9" date="2024-08-17">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.8" date="2024-07-11">
- 	 	 	<description/>
-  	</release>
-  	<release version="9.3.6" date="2024-05-14"/>
+			<description/>
+	</release>
+	<release version="9.3.26" date="2025-07-24">
+			<description/>
+	</release>
+	<release version="9.3.25" date="2025-06-26">
+			<description/>
+	</release>
+	<release version="9.3.22" date="2025-04-02">
+			<description/>
+	</release>
+	<release version="9.3.21" date="2025-03-12">
+			<description/>
+	</release>
+	<release version="9.3.20" date="2025-02-07">
+			<description/>
+	</release>
+	<release version="9.3.19" date="2025-01-23">
+			<description/>
+	</release>
+	<release version="9.3.18" date="2025-01-07">
+			<description/>
+	</release>
+	<release version="9.3.17" date="2024-12-20">
+			<description/>
+	</release>
+	<release version="9.3.16" date="2024-12-02">
+			<description/>
+	</release>
+	<release version="9.3.15" date="2024-11-18">
+			<description/>
+	</release>
+	<release version="9.3.14" date="2024-10-31">
+			<description/>
+	</release>
+	<release version="9.3.13" date="2024-10-13">
+			<description/>
+	</release>
+	<release version="9.3.12" date="2024-09-27">
+			<description/>
+	</release>
+	<release version="9.3.11" date="2024-09-08">
+			<description/>
+	</release>
+	<release version="9.3.10" date="2024-08-25">
+			<description/>
+	</release>
+	<release version="9.3.9" date="2024-08-17">
+			<description/>
+	</release>
+	<release version="9.3.8" date="2024-07-11">
+			<description/>
+	</release>
+	<release version="9.3.6" date="2024-05-14"/>
   </releases>
-  
+
   <content_rating type="oars-1.1"/>
-  
+
   <launchable type="desktop-id">org.swi_prolog.swipl.desktop</launchable>
 
   <screenshots>
