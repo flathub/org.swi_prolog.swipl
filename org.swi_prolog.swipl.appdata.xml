@@ -5,6 +5,8 @@
   <name>SWI-Prolog</name>
   <summary>ISO/Edinburgh-style Prolog interpreter</summary>
   <url type="homepage">https://www.swi-prolog.org</url>
+  <url type="vcs-browser">https://github.com/SWI-Prolog/swi-prolog</url>
+  <url type="bugtracker">https://github.com/SWI-Prolog/swi-prolog/issues</url>
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
 
@@ -114,6 +116,7 @@
   <screenshots>
     <screenshot type="default">
       <image>https://raw.githubusercontent.com/flathub/org.swi_prolog.swipl/master/swipl-win.png</image>
+      <caption>Desktop showing SWI-Prolog IDE and GUI tools</caption>
     </screenshot>
   </screenshots>
 </component>
