@@ -35,7 +35,7 @@ modules:
         commit: e584f670f9127469ddf5bb2ef2d976c8a41c19e3
         x-checker-data:
           type: git
-          tag-pattern: ^V(\d\.[\d.]+)$
+          tag-pattern: ^V(\d+\.[\d.]+)$
       - type: file
         path: org.swi_prolog.swipl.desktop
       - type: file
