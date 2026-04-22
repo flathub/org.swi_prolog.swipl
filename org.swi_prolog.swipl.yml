@@ -21,6 +21,17 @@ modules:
         url: https://github.com/yaml/libyaml
         commit: 840b65c40675e2d06bf40405ad3f12dec7f35923
 
+  - name: utf8proc
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_SHARED_LIBS=ON
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: git
+        url: https://github.com/JuliaStrings/utf8proc.git
+        commit: e5e799221b45bbb90f5fdc5c69b6b8dfbf017e78
+
   - name: fix-compose
     buildsystem: simple
     build-commands:
