@@ -82,8 +82,6 @@ modules:
       env:
         SDL_VIDEODRIVER: dummy
     config-opts:
-      - -DCMAKE_BUILD_TYPE=PGO
-      - -DEPILOG=ON
       - -DSKIP_SSL_TESTS=ON
       - -DXPCE_VIDEO=ffmpeg
     post-install:
