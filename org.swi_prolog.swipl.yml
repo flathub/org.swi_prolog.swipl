@@ -14,6 +14,8 @@ finish-args:
   - --share=network
   - --filesystem=host
   - --device=dri
+  - --device=input
+  - --require-version=1.16.0
 
 modules:
   - name: libyaml
@@ -32,6 +34,27 @@ modules:
       - type: git
         url: https://github.com/JuliaStrings/utf8proc.git
         commit: e5e799221b45bbb90f5fdc5c69b6b8dfbf017e78
+
+  - name: SDL3_sound
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DSDLSOUND_BUILD_STATIC=OFF
+      - -DSDLSOUND_BUILD_TEST=OFF
+      - -DSDLSOUND_BUILD_DOCS=OFF
+    sources:
+      - type: git
+        url: https://github.com/icculus/SDL_sound.git
+        tag: v3.2.0
+        commit: 49b3fad05c70c4f0eeb2a10055dee7a633d86cda
+        x-checker-data:
+          type: git
+          tag-pattern: ^v(3\.[\d.]+)$
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
 
   - name: fix-compose
     buildsystem: simple
@@ -61,6 +84,7 @@ modules:
         SDL_VIDEODRIVER: dummy
     config-opts:
       - -DSKIP_SSL_TESTS=ON
+      - -DXPCE_VIDEO=ffmpeg
     post-install:
       - install -D -m0644 ../org.swi_prolog.swipl.png /app/share/icons/hicolor/128x128/apps/org.swi_prolog.swipl.png
       - install -D -m0644 ../org.swi_prolog.swipl.desktop /app/share/applications/org.swi_prolog.swipl.desktop
