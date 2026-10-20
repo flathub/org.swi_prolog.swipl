@@ -60,8 +60,6 @@ modules:
       env:
         SDL_VIDEODRIVER: dummy
     config-opts:
-      - -DCMAKE_BUILD_TYPE=PGO
-      - -DEPILOG=ON
       - -DSKIP_SSL_TESTS=ON
     post-install:
       - install -D -m0644 ../org.swi_prolog.swipl.png /app/share/icons/hicolor/128x128/apps/org.swi_prolog.swipl.png
