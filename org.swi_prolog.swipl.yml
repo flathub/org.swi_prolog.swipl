@@ -7,6 +7,7 @@ command: swipl-win
 finish-args:
   - --env=NO_AT_BRIDGE=1
   - --env=XCOMPOSEFILE=/app/etc/Compose
+  - --env=SDL_CAMERA_DRIVER=pipewire,v4l2
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
