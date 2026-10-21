@@ -56,6 +56,54 @@ modules:
       - /lib/cmake
       - /lib/pkgconfig
 
+  # Graphviz layout engines (dot, neato, ...) used by library(xdot)
+  # through `dot -Tjson`.  Uses pango/cairo from the runtime for text
+  # metrics.  sfdp is disabled as it needs GTS for overlap removal.
+  - name: graphviz
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_LTDL=ON
+      - -DWITH_EXPAT=ON
+      - -DWITH_ZLIB=ON
+      - -Dwith_sfdp=OFF
+      - -DWITH_GVEDIT=OFF
+      - -DWITH_SMYRNA=OFF
+      - -DWITH_GTK=OFF
+      - -DWITH_X=OFF
+      - -DWITH_GHOSTSCRIPT=OFF
+      - -DWITH_POPPLER=OFF
+      - -DWITH_RSVG=OFF
+      - -DENABLE_TCL=OFF
+      - -DENABLE_SWIG=OFF
+      - -DENABLE_SHARP=OFF
+      - -DENABLE_D=OFF
+      - -DENABLE_GO=OFF
+      - -DENABLE_GUILE=OFF
+      - -DENABLE_JAVA=OFF
+      - -DENABLE_JAVASCRIPT=OFF
+      - -DENABLE_LUA=OFF
+      - -DENABLE_PERL=OFF
+      - -DENABLE_PHP=OFF
+      - -DENABLE_PYTHON=OFF
+      - -DENABLE_R=OFF
+      - -DENABLE_RUBY=OFF
+    sources:
+      - type: git
+        url: https://gitlab.com/graphviz/graphviz.git
+        tag: 16.1.0
+        commit: e41c710710be080ad37af1b51c6e2f8beffa9ee5
+        x-checker-data:
+          type: git
+          tag-pattern: ^(\d+\.\d+\.\d+)$
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/graphviz/demo
+      - /share/graphviz/doc
+      - /share/man
+
   - name: fix-compose
     buildsystem: simple
     build-commands:
