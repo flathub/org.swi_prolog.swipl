@@ -7,6 +7,7 @@ command: swipl-win
 finish-args:
   - --env=NO_AT_BRIDGE=1
   - --env=XCOMPOSEFILE=/app/etc/Compose
+  - --env=SDL_CAMERA_DRIVER=pipewire,v4l2
   - --share=ipc
   - --socket=fallback-x11
   - --socket=wayland
@@ -14,6 +15,8 @@ finish-args:
   - --share=network
   - --filesystem=host
   - --device=dri
+  - --device=input
+  - --require-version=1.16.0
 
 modules:
   - name: libyaml
@@ -33,6 +36,75 @@ modules:
         url: https://github.com/JuliaStrings/utf8proc.git
         commit: e5e799221b45bbb90f5fdc5c69b6b8dfbf017e78
 
+  - name: SDL3_sound
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DSDLSOUND_BUILD_STATIC=OFF
+      - -DSDLSOUND_BUILD_TEST=OFF
+      - -DSDLSOUND_BUILD_DOCS=OFF
+    sources:
+      - type: git
+        url: https://github.com/icculus/SDL_sound.git
+        tag: v3.2.0
+        commit: 49b3fad05c70c4f0eeb2a10055dee7a633d86cda
+        x-checker-data:
+          type: git
+          tag-pattern: ^v(3\.[\d.]+)$
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+
+  # Graphviz layout engines (dot, neato, ...) used by library(xdot)
+  # through `dot -Tjson`.  Uses pango/cairo from the runtime for text
+  # metrics.  sfdp is disabled as it needs GTS for overlap removal.
+  - name: graphviz
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DENABLE_LTDL=ON
+      - -DWITH_EXPAT=ON
+      - -DWITH_ZLIB=ON
+      - -Dwith_sfdp=OFF
+      - -DWITH_GVEDIT=OFF
+      - -DWITH_SMYRNA=OFF
+      - -DWITH_GTK=OFF
+      - -DWITH_X=OFF
+      - -DWITH_GHOSTSCRIPT=OFF
+      - -DWITH_POPPLER=OFF
+      - -DWITH_RSVG=OFF
+      - -DENABLE_TCL=OFF
+      - -DENABLE_SWIG=OFF
+      - -DENABLE_SHARP=OFF
+      - -DENABLE_D=OFF
+      - -DENABLE_GO=OFF
+      - -DENABLE_GUILE=OFF
+      - -DENABLE_JAVA=OFF
+      - -DENABLE_JAVASCRIPT=OFF
+      - -DENABLE_LUA=OFF
+      - -DENABLE_PERL=OFF
+      - -DENABLE_PHP=OFF
+      - -DENABLE_PYTHON=OFF
+      - -DENABLE_R=OFF
+      - -DENABLE_RUBY=OFF
+    sources:
+      - type: git
+        url: https://gitlab.com/graphviz/graphviz.git
+        tag: 16.1.0
+        commit: e41c710710be080ad37af1b51c6e2f8beffa9ee5
+        x-checker-data:
+          type: git
+          tag-pattern: ^(\d+\.\d+\.\d+)$
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share/graphviz/demo
+      - /share/graphviz/doc
+      - /share/man
+
   - name: fix-compose
     buildsystem: simple
     build-commands:
@@ -43,8 +115,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SWI-Prolog/swipl-devel.git
-        tag: V10.1.18
-        commit: b7c0c6b6f605076563e661c4edac3460b70726e7
+        tag: V10.1.19
+        commit: 724df2b54cf1dda6fb3327d9167db2ae750c460e
         x-checker-data:
           type: git
           tag-pattern: ^V(\d+\.[\d.]+)$
@@ -60,9 +132,8 @@ modules:
       env:
         SDL_VIDEODRIVER: dummy
     config-opts:
-      - -DCMAKE_BUILD_TYPE=PGO
-      - -DEPILOG=ON
       - -DSKIP_SSL_TESTS=ON
+      - -DXPCE_VIDEO=ffmpeg
     post-install:
       - install -D -m0644 ../org.swi_prolog.swipl.png /app/share/icons/hicolor/128x128/apps/org.swi_prolog.swipl.png
       - install -D -m0644 ../org.swi_prolog.swipl.desktop /app/share/applications/org.swi_prolog.swipl.desktop

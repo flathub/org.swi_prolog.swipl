@@ -163,8 +163,24 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/flathub/org.swi_prolog.swipl/master/swipl-win.png</image>
+      <image>https://raw.githubusercontent.com/SWI-Prolog/screenshots/master/swipl-win.png</image>
       <caption>Desktop showing SWI-Prolog IDE and GUI tools</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SWI-Prolog/screenshots/master/profiler.png</image>
+      <caption>SWI-Prolog execution profiler</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SWI-Prolog/screenshots/master/editor.png</image>
+      <caption>Tiled tools (navigator, editor, console, profiler)</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SWI-Prolog/screenshots/master/debugger.png</image>
+      <caption>Debugger with the other tools in the background</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/SWI-Prolog/screenshots/master/xref.png</image>
+      <caption>The cross-referencing tool with a menu showing which predicates use translate_goal/3</caption>
     </screenshot>
   </screenshots>
 </component>
