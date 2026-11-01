@@ -16,7 +16,6 @@ finish-args:
   - --filesystem=host
   - --device=dri
   - --device=input
-  - --require-version=1.16.0
 
 modules:
   - name: libyaml
