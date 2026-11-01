@@ -15,7 +15,8 @@ finish-args:
   - --share=network
   - --filesystem=host
   - --device=dri
-  - --device-if=input:has-input-device
+  - --device-if=all:!has-input-device
+  - --device=input
 
 modules:
   - name: libyaml
