@@ -93,8 +93,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/graphviz/graphviz.git
-        tag: 16.1.0
-        commit: e41c710710be080ad37af1b51c6e2f8beffa9ee5
+        tag: 16.1.1
+        commit: b2a4eced3016a11a35020ebf8454c762745a4f8c
         x-checker-data:
           type: git
           tag-pattern: ^(\d+\.\d+\.\d+)$
@@ -115,8 +115,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/SWI-Prolog/swipl-devel.git
-        tag: V10.1.20
-        commit: 807a2eeaac787822c96b5b63385bb9e9441d0e5f
+        tag: V10.1.21
+        commit: a2e497d51320c8e474ccc8e314291fe5cff60dc7
         x-checker-data:
           type: git
           tag-pattern: ^V(\d+\.[\d.]+)$
