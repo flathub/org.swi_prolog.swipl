@@ -93,8 +93,8 @@ modules:
     sources:
       - type: git
         url: https://gitlab.com/graphviz/graphviz.git
-        tag: 16.1.1
-        commit: b2a4eced3016a11a35020ebf8454c762745a4f8c
+        tag: 16.1.2
+        commit: 445239ae6d37897a48adf308c8172b90162ff0bb
         x-checker-data:
           type: git
           tag-pattern: ^(\d+\.\d+\.\d+)$
