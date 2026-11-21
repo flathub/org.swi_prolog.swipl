@@ -22,9 +22,13 @@
   </description>
 
   <releases>
+	<release version="11.1.0" date="2026-11-21">
+			<url type="details">https://github.com/SWI-Prolog/swipl-devel/releases/tag/V11.1.0</url>
+			<description></description>
+	</release>
 	<release version="10.1.21" date="2026-11-17">
 			<url type="details">https://github.com/SWI-Prolog/swipl-devel/releases/tag/V10.1.21</url>
-			<description></description>
+			<description/>
 	</release>
 	<release version="10.1.20" date="2026-10-31">
 			<description/>
