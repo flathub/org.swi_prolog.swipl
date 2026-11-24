@@ -15,8 +15,6 @@ finish-args:
   - --share=network
   - --filesystem=host
   - --device=dri
-  - --device=input
-  - --require-version=1.16.0
 
 modules:
   - name: libyaml
@@ -24,6 +22,12 @@ modules:
       - type: git
         url: https://github.com/yaml/libyaml
         commit: 840b65c40675e2d06bf40405ad3f12dec7f35923
+    config-opts:
+      - --disable-static
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - '*.la'
 
   - name: utf8proc
     buildsystem: cmake-ninja
@@ -34,7 +38,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/JuliaStrings/utf8proc.git
-        commit: e5e799221b45bbb90f5fdc5c69b6b8dfbf017e78
+        tag: v2.12.0
+        commit: 79cdd5ab40c79afa559f689ffc13b76812dee1ac
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+    cleanup:
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
 
   - name: SDL3_sound
     buildsystem: cmake-ninja
@@ -57,53 +69,55 @@ modules:
       - /lib/cmake
       - /lib/pkgconfig
 
-  # Graphviz layout engines (dot, neato, ...) used by library(xdot)
-  # through `dot -Tjson`.  Uses pango/cairo from the runtime for text
-  # metrics.  sfdp is disabled as it needs GTS for overlap removal.
+  # Graphviz for library(graphviz), the same minimal build as the
+  # Windows and macOS versions (scripts/macos-deps.sh in swipl-devel):
+  # only the libraries (cdt, cgraph, pathplan, xdot, gvc) and the dot
+  # and neato layout plugins.  No programs, no renderers, no text layout
+  # (pango/cairo) and no ltdl: library(graphviz) registers the layout
+  # plugins itself, opening them from /app/lib/graphviz.  expat
+  # (HTML-like labels) comes from the runtime.  Without GTS, neato loses
+  # overlap=prism and sfdp the triangle/rng smoothing modes.
   - name: graphviz
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DENABLE_LTDL=ON
-      - -DWITH_EXPAT=ON
-      - -DWITH_ZLIB=ON
-      - -Dwith_sfdp=OFF
-      - -DWITH_GVEDIT=OFF
-      - -DWITH_SMYRNA=OFF
-      - -DWITH_GTK=OFF
-      - -DWITH_X=OFF
-      - -DWITH_GHOSTSCRIPT=OFF
-      - -DWITH_POPPLER=OFF
-      - -DWITH_RSVG=OFF
-      - -DENABLE_TCL=OFF
-      - -DENABLE_SWIG=OFF
-      - -DENABLE_SHARP=OFF
-      - -DENABLE_D=OFF
-      - -DENABLE_GO=OFF
-      - -DENABLE_GUILE=OFF
-      - -DENABLE_JAVA=OFF
-      - -DENABLE_JAVASCRIPT=OFF
-      - -DENABLE_LUA=OFF
-      - -DENABLE_PERL=OFF
-      - -DENABLE_PHP=OFF
-      - -DENABLE_PYTHON=OFF
-      - -DENABLE_R=OFF
-      - -DENABLE_RUBY=OFF
+    buildsystem: simple
+    build-commands:
+      - ./configure --prefix=${FLATPAK_DEST} --libdir=${FLATPAK_DEST}/lib
+          --disable-static --enable-shared
+          --disable-ltdl --disable-ltdl-install --disable-man-pdfs
+          --disable-swig --disable-sharp --disable-d --disable-go
+          --disable-guile --disable-java --disable-javascript --disable-lua
+          --disable-perl --disable-php --disable-python --disable-python3
+          --disable-r --disable-ruby --disable-tcl
+          --with-expat --without-x --without-quartz --without-gdiplus
+          --without-pangocairo --without-freetype2 --without-libgd
+          --without-webp --without-poppler --without-rsvg --without-ghostscript
+          --without-lasi --without-gdk --without-gdk-pixbuf --without-gtk
+          --without-gtkgl --without-gtkglext --without-glade --without-qt
+          --without-glut --without-gts --without-ann --without-devil
+          --without-aalib --without-smyrna
+          --with-sfdp --with-ortho --with-digcola --with-ipsepcola
+      - grep -q '^#define HAVE_EXPAT 1' config.h
+      - make -j${FLATPAK_BUILDER_N_JOBS} -C lib
+      - make -j${FLATPAK_BUILDER_N_JOBS} -C plugin/dot_layout
+      - make -j${FLATPAK_BUILDER_N_JOBS} -C plugin/neato_layout
+      - for d in lib/cdt lib/cgraph lib/pathplan lib/xdot lib/common lib/pack
+          lib/gvc plugin/dot_layout plugin/neato_layout; do make -C $d install
+          || exit 1; done
     sources:
-      - type: git
-        url: https://gitlab.com/graphviz/graphviz.git
-        tag: 16.1.2
-        commit: 445239ae6d37897a48adf308c8172b90162ff0bb
+      - type: archive
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/16.1.2/graphviz-16.1.2.tar.xz
+        sha256: 9780938f03659e2effbbfbbaec94940108e794199b73196fa339ca911890e8c9
         x-checker-data:
-          type: git
-          tag-pattern: ^(\d+\.\d+\.\d+)$
+          type: json
+          url: https://gitlab.com/api/v4/projects/4207231/releases
+          version-query: '[.[] | .tag_name | select(test("^[0-9]+\\.[0-9]+\\.[0-9]+$"))]
+            | first'
+          url-query: '"https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/"
+            + $version + "/graphviz-" + $version + ".tar.xz"'
     cleanup:
       - /include
       - /lib/pkgconfig
-      - /share/graphviz/demo
-      - /share/graphviz/doc
       - /share/man
+      - '*.la'
 
   - name: fix-compose
     buildsystem: simple
